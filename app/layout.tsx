@@ -4,6 +4,7 @@ import Script from "next/script";
 import { ThemeProvider, NO_FLASH_SCRIPT } from "@/components/theme-provider";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
+import { LoadingScreen } from "@/components/loading-screen";
 import {
   SITE_NAME,
   SITE_URL,
@@ -98,12 +99,15 @@ export default function RootLayout({
             __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
           }}
         />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* eslint-disable-next-line @next/next/no-page-custom-font -- App Router: React 19 hoists <link> to <head>; this rule only applies to the Pages Router. */}
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=optional"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
         />
         <ThemeProvider>
+          <LoadingScreen />
           <Nav />
           {children}
           <Footer />
