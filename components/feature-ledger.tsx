@@ -4,7 +4,7 @@ import { PillarRow } from "@/components/pillar-row";
 
 export function FeatureLedger() {
   return (
-    <section className="mx-auto max-w-[1160px] px-8 pb-15 pt-25">
+    <section className="mx-auto max-w-290 px-8 pb-15 pt-25">
       <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[0.9fr_1.4fr]">
         <Reveal className="lg:sticky lg:top-24">
           <div className="mb-3.5 text-[13px] font-bold uppercase tracking-wider text-primary-ink">
