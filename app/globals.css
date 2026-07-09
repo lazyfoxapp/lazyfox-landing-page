@@ -1,26 +1,165 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+[data-theme="light"] {
+  --bg: #fbf7ee;
+  --bg2: #f4ead3;
+  --surface: #ffffff;
+  --surface2: #fbf3e4;
+  --text: #2a1b12;
+  --muted: #836f58;
+  --primary: #e07b3a;
+  --primary-ink: #b85f26;
+  --primary-soft: #f7dcc2;
+  --secondary: #6e8a47;
+  --secondary-soft: #dce6c9;
+  --border: #eaddc6;
+  --hero: #f3e7cf;
+  --shadow: rgba(66, 40, 18, 0.1);
+}
+
+[data-theme="dark"] {
+  --bg: #191309;
+  --bg2: #20180e;
+  --surface: #241b10;
+  --surface2: #2c2113;
+  --text: #f7ecd6;
+  --muted: #b39c7c;
+  --primary: #f0a063;
+  --primary-ink: #f5b984;
+  --primary-soft: #3a2a18;
+  --secondary: #a6be7a;
+  --secondary-soft: #2a3319;
+  --border: #3a2c1b;
+  --hero: #20180e;
+  --shadow: rgba(0, 0, 0, 0.35);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-bg2: var(--bg2);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface2);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-primary-ink: var(--primary-ink);
+  --color-primary-soft: var(--primary-soft);
+  --color-secondary: var(--secondary);
+  --color-secondary-soft: var(--secondary-soft);
+  --color-border: var(--border);
+  --color-hero: var(--hero);
+  --font-display: var(--font-bricolage), sans-serif;
+  --font-body: var(--font-hanken), sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  transition:
+    background 0.4s ease,
+    color 0.4s ease;
+}
+
+::selection {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Layered so Tailwind's utilities (e.g. hidden, md:hidden) can still
+   override display: inline-block when combined with this class. */
+@layer base {
+  .msym {
+    font-family: "Material Symbols Rounded";
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-feature-settings: "liga";
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@keyframes lf-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(1.5deg);
+  }
+}
+
+@keyframes lf-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes lf-menu {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-float {
+  animation: lf-float 7s ease-in-out infinite;
+}
+
+.animate-pulse-soft {
+  animation: lf-pulse 9s ease-in-out infinite;
+}
+
+.animate-menu {
+  animation: lf-menu 0.16s ease;
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(34px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-reveal="in"] {
+  opacity: 1;
+  transform: none;
+}
+
+::-webkit-scrollbar {
+  width: 11px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 6px;
+  border: 3px solid var(--bg2);
 }
